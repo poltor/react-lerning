@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 
-export class Task extends Component {
+export class Task extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      done: props.done,
-    };
   }
 
   render() {
-    const { description, title } = this.props;
-    const { done } = this.state;
+    const { id, description, title, onChangeTaskDone , done } = this.props;
 
     return (
       <li className="task">
@@ -24,7 +19,7 @@ export class Task extends Component {
           <b>{title}</b>
         )}
         {!done && (
-          <button onClick={() => this.setState({ done: true })}>
+          <button onClick={() => onChangeTaskDone(id)}>
             Done!
           </button>
         )}

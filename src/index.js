@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {App, HelloByName, HelloByNameClass} from './App';
 
-ReactDOM.render('Hello world!', document.getElementById('root'));
-
-
-// const element = React.createElement('div', '',  'Hello world!');
-// ReactDOM.render(element, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
-// ReactDOM.render(<div>Hello world!</div>, document.getElementById('root'));
+// ReactDOM.render(<HelloByName name="John" />, document.getElementById('root'));
 
+
+// ReactDOM.render(<HelloByNameClass name="John" />, document.getElementById('root'));
 
 

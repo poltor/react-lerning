@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 
-export const Task = (props) => {
-  const { description, title } = props;
+export class Task extends Component {
 
-  return (
-    <li className="task">
-      <b>{title}</b>
+  constructor(props) {
+    super(props);
 
-      {description && (
-        <p>
-          {description}
-        </p>
-      )}
-    </li>
-  );
-};
+    this.state = {
+      done: props.done,
+    };
+  }
+
+  render() {
+    const { description, title } = this.props;
+    const { done } = this.state;
+
+    return (
+      <li className="task">
+        {done && (
+          <s>{title}</s>
+        )}
+        {!done && (
+          <b>{title}</b>
+        )}
+        {!done && (
+          <button onClick={() => this.setState({ done: true })}>
+            Done!
+          </button>
+        )}
+
+
+        {description && (
+          <p>
+            {description}
+          </p>
+        )}
+      </li>
+    );
+  }
+
+}

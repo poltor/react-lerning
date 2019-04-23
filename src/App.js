@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Task} from './Task';
+import {AddTask} from "./AddTask";
 
 const tasks = [
   {
@@ -48,6 +49,10 @@ export class App extends Component {
   render() {
     return (
       <ul>
+        <AddTask />
+        <br />
+        <br />
+        <br />
         {this.state.tasks.map((task, i) => (
           <Task
             {...task}

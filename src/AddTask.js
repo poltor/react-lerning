@@ -24,9 +24,22 @@ export class AddTask extends Component {
     });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { title, description } = this.state;
+    const { onSubmit } = this.props;
+
+    onSubmit({
+      title,
+      description,
+      done: false,
+    });
+  };
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div>
           <input
             type="text"

@@ -3,10 +3,6 @@ import React, { PureComponent } from 'react';
 
 export class Task extends PureComponent {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { id, description, title, onChangeTaskDone , done } = this.props;
 

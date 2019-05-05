@@ -46,10 +46,16 @@ export class App extends Component {
     this.setState({ tasks });
   };
 
+  handleAddTask = (task) => {
+    this.setState({
+      tasks: [...this.state.tasks, task]
+    });
+  };
+
   render() {
     return (
       <ul>
-        <AddTask />
+        <AddTask onSubmit={this.handleAddTask} />
         <br />
         <br />
         <br />

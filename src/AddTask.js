@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 
 export class AddTask extends Component {
+
+  static propTypes = {
+    onSubmit: PropTypes.func,
+  };
+
+  static defaultProps= {
+    onSubmit: () => {},
+  };
 
   constructor(props) {
     super(props);

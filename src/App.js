@@ -48,7 +48,9 @@ export class App extends Component {
 
   handleAddTask = (task) => {
     this.setState({
-      tasks: [...this.state.tasks, task]
+      tasks: [...this.state.tasks, Object.assign({}, task, {
+        id: this.state.tasks.length + 1,
+      })]
     });
   };
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore from './configureStore';
+import configureStore from './store/configureStore';
 import { actions } from './reducers/todo';
-import App from './App';
+import Root from './containers/Root';
 
 
 const store = configureStore();
@@ -19,9 +18,7 @@ store.dispatch(actions.addTodo({
 
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root store={store} />,
   document.getElementById('root')
 );
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Task } from './Task';
 import { bindActionCreators } from 'redux';
-import { AddTask } from './AddTask';
 import { connect } from 'react-redux';
-import { actions as todoActions, todoListSelector, todoCountSelector } from './reducers/todo';
+import { actions as todoActions, todoListSelector, todoCountSelector } from './../reducers/todo';
+
+import { Task } from './../components/Task';
+import { AddTask } from './../components/AddTask';
 
 
 

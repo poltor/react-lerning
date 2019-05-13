@@ -6,6 +6,10 @@ import { App } from './App';
 
 const store = configureStore();
 
+console.log(store.getState())
+
+// console.log(store.getState());
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

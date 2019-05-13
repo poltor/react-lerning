@@ -1,71 +1,28 @@
 import React, { Component } from 'react';
-import {Task} from './Task';
-import {AddTask} from "./AddTask";
-
-const tasks = [
-  {
-    id: 0,
-    title: 'Купить хлеба',
-    description: 'По пути домой',
-    done: false,
-  },
-  {
-    id: 1,
-    title: 'Задеплоить сервис',
-    done: true,
-  },
-  {
-    id: 2,
-    title: 'Погладить кота',
-    done: false,
-  },
-];
+import { Task } from './Task';
+import { bindActionCreators } from 'redux';
+import { AddTask } from './AddTask';
+import { connect } from 'react-redux';
+import { actions as todoActions, todoListSelector, todoCountSelector } from './reducers/todo';
 
 
 
-export class App extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      tasks: [...tasks],
-    }
-  }
-
-  handleChangeTaskDone = (id) => {
-    const tasks = this.state.tasks
-      .map(task => {
-        if (task.id === id) {
-          return Object.assign({}, task, { done: true })
-        }
-
-        return task;
-      });
-
-    this.setState({ tasks });
-  };
-
-  handleAddTask = (task) => {
-    this.setState({
-      tasks: [...this.state.tasks, Object.assign({}, task, {
-        id: this.state.tasks.length + 1,
-      })]
-    });
-  };
+class App extends Component {
 
   render() {
+    const { todos, count, actions } = this.props;
+
     return (
       <ul>
-        <AddTask onSubmit={this.handleAddTask} />
-        <br />
-        <br />
-        <br />
-        {this.state.tasks.map((task, i) => (
+        <h1>Add todo</h1>
+        <AddTask onSubmit={actions.addTodo} />
+
+        <h1>Todos ({count})</h1>
+        {todos.map((task, i) => (
           <Task
             {...task}
             key={i.toString()}
-            onChangeTaskDone={this.handleChangeTaskDone}
+            onChangeTaskDone={actions.markAsDoneTodo}
           />
         ))}
       </ul>
@@ -73,3 +30,23 @@ export class App extends Component {
   }
 
 }
+
+
+function mapStateToProps(state) {
+  return {
+    count: todoCountSelector(state),
+    todos: todoListSelector(state),
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({
+      addTodo: todoActions.addTodo,
+      markAsDoneTodo: todoActions.markAsDone,
+    }, dispatch),
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

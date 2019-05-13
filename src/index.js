@@ -6,9 +6,48 @@ import { App } from './App';
 
 const store = configureStore();
 
-console.log(store);
-
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+store.dispatch({
+  type: 'ADD_TODO',
+  text: 'ololo',
+});
 
 

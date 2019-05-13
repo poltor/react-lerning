@@ -1,53 +1,33 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { actions as todoActions, todoListSelector, todoCountSelector } from './../reducers/todo';
+import { Route, Switch } from 'react-router'
+import { BrowserRouter } from 'react-router-dom';
 
-import { Task } from './../components/Task';
-import { AddTask } from './../components/AddTask';
-
+import routes from '../routes';
+import Menu from '../components/Menu';
 
 
 class App extends Component {
 
   render() {
-    const { todos, count, actions } = this.props;
-
     return (
-      <ul>
-        <h1>Add todo</h1>
-        <AddTask onSubmit={actions.addTodo} />
+      <BrowserRouter>
+        <div>
+          <Menu />
 
-        <h1>Todos ({count})</h1>
-        {todos.map((task, i) => (
-          <Task
-            {...task}
-            key={i.toString()}
-            onChangeTaskDone={actions.markAsDoneTodo}
-          />
-        ))}
-      </ul>
+          <Switch>
+            {routes.map((route, i) => (
+              <Route
+                key={i.toString()}
+                {...route}
+              />
+            ))}
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 
 }
 
 
-function mapStateToProps(state) {
-  return {
-    count: todoCountSelector(state),
-    todos: todoListSelector(state),
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({
-      addTodo: todoActions.addTodo,
-      markAsDoneTodo: todoActions.markAsDone,
-    }, dispatch),
-  };
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
